@@ -3,6 +3,7 @@ module github.com/vietnam-immigrations/go-utils
 go 1.18
 
 require (
+	github.com/aws/aws-lambda-go v1.32.1
 	github.com/aws/aws-sdk-go-v2 v1.16.7
 	github.com/aws/aws-sdk-go-v2/config v1.15.14
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.27.4
@@ -12,7 +13,6 @@ require (
 )
 
 require (
-	github.com/aws/aws-lambda-go v1.32.1 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.12.9 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.8 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.14 // indirect
