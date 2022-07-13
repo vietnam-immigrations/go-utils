@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 2022-07-13
+### Added
+- Package "rest"
+
 ## [1.0.3] - 2022-07-13
 ### Added
 - Add "VisaS3Key" to Applicant
