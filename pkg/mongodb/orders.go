@@ -39,6 +39,8 @@ type Applicant struct {
 	Nationality    string `bson:"nationality" json:"nationality"`
 	PassportNumber string `bson:"passportNumber" json:"passportNumber"`
 	PassportExpiry string `bson:"passportExpiry" json:"passportExpiry"`
+
+	VisaS3Key string `bson:"visaS3Key" json:"visaS3Key"`
 }
 
 type Order struct {
