@@ -6,7 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.1] - 2022-07-123
+## [1.0.1] - 2022-07-13
+### Added
+- Add "Metas"
+
+## [1.0.1] - 2022-07-13
 ### Added
 - Get order from woo
 - Mongo collection "orders"

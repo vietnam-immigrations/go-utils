@@ -1,5 +1,7 @@
 package woo
 
+import "fmt"
+
 type Billing struct {
 	FirstName         string `json:"first_name"`
 	LastName          string `json:"last_name"`
@@ -36,6 +38,17 @@ type Meta struct {
 	DisplayValue string `json:"display_value"`
 }
 
+type Metas []Meta
+
+func (ms Metas) GetMeta(key string) (*Meta, error) {
+	for _, meta := range ms {
+		if meta.Key == key {
+			return &meta, nil
+		}
+	}
+	return nil, fmt.Errorf("meta data [%s] not found", key)
+}
+
 type Image struct {
 	ID  string `json:"id"`
 	Src string `json:"src"`
@@ -53,7 +66,7 @@ type LineItem struct {
 	Total       string        `json:"total"`
 	TotalTax    string        `json:"total_tax"`
 	Taxes       []interface{} `json:"taxes"`
-	MetaData    []Meta        `json:"meta_data"`
+	MetaData    Metas         `json:"meta_data"`
 	SKU         string        `json:"sku"`
 	Price       int           `json:"price"`
 	Image       Image         `json:"image"`
@@ -69,7 +82,7 @@ type FeeLine struct {
 	Total     string        `json:"total"`
 	TotalTax  string        `json:"total_tax"`
 	Taxes     []interface{} `json:"taxes"`
-	MetaData  []Meta        `json:"meta_data"`
+	MetaData  Metas         `json:"meta_data"`
 }
 
 type Vs2CheckoutCustomFields struct {
@@ -113,7 +126,7 @@ type Order struct {
 	DatePaid           string                  `json:"date_paid"`
 	CartHash           string                  `json:"cart_hash"`
 	Number             string                  `json:"number"`
-	MetaData           []Meta                  `json:"meta_data"`
+	MetaData           Metas                   `json:"meta_data"`
 	LineItems          []LineItem              `json:"line_items"`
 	TaxLines           []interface{}           `json:"tax_lines"`
 	ShippingLines      []interface{}           `json:"shipping_lines"`
