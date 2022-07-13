@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func CollectionOrder(ctx context.Context, log *logrus.Entry, stage string) (*mongo.Collection, error) {
+func CollectionOrders(ctx context.Context, log *logrus.Entry, stage string) (*mongo.Collection, error) {
 	return collection(ctx, log, stage, "orders")
 }
 
