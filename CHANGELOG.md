@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.10] - 2022-07-18
+### Fixed
+- Wrong package name
+
 ## [1.0.9] - 2022-07-18
 ### Added
 - SNS client
