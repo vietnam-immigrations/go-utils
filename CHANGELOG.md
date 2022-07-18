@@ -6,7 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.6] - 2022-07-18
+## [1.0.8] - 2022-07-18
+### Added
+- S3 client
+
+## [1.0.7] - 2022-07-18
 ### Added
 - ErrorMessage for CollectionResult
 
