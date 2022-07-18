@@ -1,4 +1,4 @@
-package s3
+package sns
 
 import (
 	"context"
@@ -27,6 +27,6 @@ func NewClient(ctx context.Context, log *logrus.Entry) (*sns.Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	log.Info("s3 client created")
+	log.Info("sns client created")
 	return client, nil
 }
