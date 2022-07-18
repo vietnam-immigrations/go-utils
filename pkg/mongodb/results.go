@@ -14,9 +14,10 @@ func CollectionResult(ctx context.Context, log *logrus.Entry, stage string) (*mo
 }
 
 type ResultFile struct {
-	Name        string `bson:"name" json:"name"`
-	Processed   bool   `bson:"processed" json:"processed"`
-	OrderNumber string `bson:"orderNumber" json:"orderNumber"`
+	Name         string `bson:"name" json:"name"`
+	Processed    bool   `bson:"processed" json:"processed"`
+	ErrorMessage string `bson:"errorMessage" json:"errorMessage"`
+	OrderNumber  string `bson:"orderNumber" json:"orderNumber"`
 }
 
 type Result struct {
