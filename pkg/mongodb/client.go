@@ -64,3 +64,16 @@ func newClient(ctx context.Context, log *logrus.Entry, stage string) (*mongo.Cli
 	}
 	return client, nil
 }
+
+func Disconnect(ctx context.Context, log *logrus.Entry) {
+	if client != nil {
+		err := client.Disconnect(ctx)
+		if err != nil {
+			log.Errorf("failed to disconnect mongodb client: %s", err)
+		} else {
+			log.Infof("mongodb client disconnected")
+			client = nil
+			initClient = sync.Once{}
+		}
+	}
+}
