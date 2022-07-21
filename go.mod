@@ -9,6 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/sns v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.27.4
+	github.com/mailjet/mailjet-apiv3-go/v4 v4.0.1
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.8.1
 	github.com/stretchr/testify v1.8.0
@@ -35,6 +36,7 @@ require (
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
+	github.com/mailjet/mailjet-apiv3-go/v3 v3.2.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.0.2 // indirect
