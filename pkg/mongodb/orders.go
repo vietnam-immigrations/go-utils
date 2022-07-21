@@ -41,6 +41,7 @@ type Applicant struct {
 	PassportExpiry string `bson:"passportExpiry" json:"passportExpiry"`
 
 	VisaS3Key string `bson:"visaS3Key" json:"visaS3Key"`
+	VisaSent  bool   `bson:"visaSent" json:"visaSent"`
 }
 
 type Order struct {
@@ -53,8 +54,8 @@ type Order struct {
 	Number             string             `bson:"number" json:"number"`
 	Trip               Trip               `bson:"trip" json:"trip"`
 	Applicants         []Applicant        `bson:"applicants" json:"applicants"`
-	AllVisaSent        bool               `bson:"allVisaSent" json:"allVisaSent"`
 
-	CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
-	UpdatedAt time.Time `bson:"updatedAt" json:"updatedAt"`
+	AllVisaSent bool      `bson:"allVisaSent" json:"allVisaSent"`
+	CreatedAt   time.Time `bson:"createdAt" json:"createdAt"`
+	UpdatedAt   time.Time `bson:"updatedAt" json:"updatedAt"`
 }
