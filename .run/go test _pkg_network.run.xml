@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="go test /pkg/network" type="GoTestRunConfiguration" factoryName="Go Test">
+  <configuration default="false" name="go test pkg/network" type="GoTestRunConfiguration" factoryName="Go Test">
     <module name="go-utils" />
     <target name="golang:1.18" />
     <working_directory value="$PROJECT_DIR$/pkg/network" />

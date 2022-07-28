@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.16] - 2022-07-28
+### Added
+- Generate mongodb update object from JSON patch
+
 ## [1.0.15] - 2022-07-20
 ### Added
 - Applicant VisaSent
