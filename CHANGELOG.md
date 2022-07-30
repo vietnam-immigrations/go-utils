@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2022-07-29
+### Added
+- Logger
+
 ## [1.0.16] - 2022-07-28
 ### Added
 - Generate mongodb update object from JSON patch
