@@ -4,6 +4,7 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
+	"github.com/vietnam-immigrations/go-utils/pkg/mongodb"
 )
 
 type LogField string
@@ -42,4 +43,10 @@ func NewFromRequest(request *events.APIGatewayProxyRequest) *logrus.Entry {
 		WithField(string(LogFieldRequestPath), request.Path).
 		WithField(string(LogFieldRequestMethod), request.HTTPMethod).
 		WithField(string(LogFieldCorrelationID), correlationID)
+}
+
+func InstrumentOrderData(log *logrus.Entry, order mongodb.Order) *logrus.Entry {
+	return log.WithField(string(LogFieldOrderID), order.ID).
+		WithField(string(LogFieldOrderWooID), order.OrderID).
+		WithField(string(LogFieldOrderNumber), order.Number)
 }
