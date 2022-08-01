@@ -2,6 +2,7 @@ package network
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -9,15 +10,21 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func DownloadFile(log *logrus.Entry, url string) ([]byte, error) {
+// DownloadFileWithTimeout download file with a specific timeout
+func DownloadFileWithTimeout(log *logrus.Entry, url string, timeout time.Duration) ([]byte, error) {
 	log.Infof("download file [%s]", url)
-	client := http.Client{Timeout: 30 * time.Second}
+	client := http.Client{Timeout: timeout}
 	res, err := client.Get(url)
 	if err != nil {
 		log.Errorf("failed to download: %s", err)
 		return nil, err
 	}
-	defer res.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			log.Errorf("failed to close request body: %s", err)
+		}
+	}(res.Body)
 	if res.StatusCode >= http.StatusBadRequest {
 		log.Errorf("status code [%d]", res.StatusCode)
 		return nil, fmt.Errorf("status code [%d]", res.StatusCode)
@@ -28,4 +35,9 @@ func DownloadFile(log *logrus.Entry, url string) ([]byte, error) {
 		return nil, err
 	}
 	return body, nil
+}
+
+// DownloadFile download file, default timeout = 30 seconds
+func DownloadFile(log *logrus.Entry, url string) ([]byte, error) {
+	return DownloadFileWithTimeout(log, url, 30*time.Second)
 }
