@@ -10,16 +10,16 @@ import (
 type LogField string
 
 const (
-	LogFieldStage                  LogField = "stage"
-	LogFieldFunction               LogField = "function"
-	LogFieldRequestID              LogField = "request_id"
-	LogFieldRequestPath            LogField = "request_path"
-	LogFieldRequestMethod          LogField = "request_method"
-	LogFieldCorrelationID          LogField = "correlation_id"
-	LogFieldOrderID                LogField = "order_id"
-	LogFieldOrderWooID             LogField = "order_woo_id"
-	LogFieldOrderNumber            LogField = "order_number"
-	LogFieldCustomerPassportNumber LogField = "customer_passport_number"
+	LogFieldStage                   LogField = "stage"
+	LogFieldFunction                LogField = "function"
+	LogFieldRequestID               LogField = "request_id"
+	LogFieldRequestPath             LogField = "request_path"
+	LogFieldRequestMethod           LogField = "request_method"
+	LogFieldCorrelationID           LogField = "correlation_id"
+	LogFieldOrderID                 LogField = "order_id"
+	LogFieldOrderWooID              LogField = "order_woo_id"
+	LogFieldOrderNumber             LogField = "order_number"
+	LogFieldApplicantPassportNumber LogField = "applicant_passport_number"
 )
 
 func New() *logrus.Entry {
