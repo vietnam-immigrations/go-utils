@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.6] - 2022-08-05
+### Added
+- Invoice title
+
 ## [1.1.5] - 2022-08-03
 ### Added
 - mongodb collection "invoices"
