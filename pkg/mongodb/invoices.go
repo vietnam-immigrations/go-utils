@@ -31,6 +31,7 @@ type InvoiceItem struct {
 type Invoice struct {
 	ID    primitive.ObjectID `bson:"_id" json:"id"`
 	Items []InvoiceItem      `bson:"items" json:"items"`
+	Title string             `bson:"title" json:"title"`
 
 	CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
 	UpdatedAt time.Time `bson:"updatedAt" json:"updatedAt"`
