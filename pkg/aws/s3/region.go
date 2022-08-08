@@ -9,7 +9,7 @@ import (
 )
 
 func NewClientForRegion(ctx context.Context, log *logrus.Entry, region string) (*s3.Client, error) {
-	log.Info("create s3 client for region [%s]", region)
+	log.Infof("create s3 client for region [%s]", region)
 	cfg, err := config.LoadDefaultConfig(ctx)
 	if err != nil {
 		log.Errorf("failed to load default config: %s", err)
