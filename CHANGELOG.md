@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2022-08-08
+### Added
+- S3 NewClientForRegion
+
+## [1.2.0] - 2022-08-08
+### Added
+- Shared function to upload CV
+
 ## [1.1.6] - 2022-08-05
 ### Added
 - Invoice title
