@@ -18,6 +18,8 @@ type ResultFile struct {
 	Processed    bool   `bson:"processed" json:"processed"`
 	ErrorMessage string `bson:"errorMessage" json:"errorMessage"`
 	OrderNumber  string `bson:"orderNumber" json:"orderNumber"`
+	// PassportNumber used to match CV manually
+	PassportNumber string `bson:"passportNumber" json:"passportNumber"`
 }
 
 type Result struct {
