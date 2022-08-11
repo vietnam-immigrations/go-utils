@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2022-08-11
+### Added
+- Text package
+- Method to remove non-ascii characters
+
 ## [1.2.2] - 2022-08-10
 ### Added
 - ResultFile PassportNumber
