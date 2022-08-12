@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/aws/ssm"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/ssm"
 )
 
 func GetOrder(ctx context.Context, log *logrus.Entry, stage string, orderID string) (*Order, error) {

@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/vietnam-immigrations/go-utils/pkg/rest"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/rest"
 	"go.mongodb.org/mongo-driver/bson"
 )
 

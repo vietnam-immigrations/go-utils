@@ -6,8 +6,8 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
-	"github.com/vietnam-immigrations/go-utils/pkg/logger"
-	"github.com/vietnam-immigrations/go-utils/pkg/notification"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/notification"
 )
 
 func TestCreate(t *testing.T) {

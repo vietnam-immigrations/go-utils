@@ -10,8 +10,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awss3 "github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/aws/s3"
-	"github.com/vietnam-immigrations/go-utils/pkg/mongodb"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/s3"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/mongodb"
 )
 
 func putToS3Bucket(ctx context.Context, log *logrus.Entry, result *mongodb.Result, bucket string, fileName string, fileContent io.ReadCloser) (string, error) {

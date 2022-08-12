@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/vietnam-immigrations/go-utils/pkg/text"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/text"
 )
 
 func TestRemoveNonASCII(t *testing.T) {

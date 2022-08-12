@@ -9,7 +9,7 @@ import (
 	"github.com/mailjet/mailjet-apiv3-go/v4"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/aws/ssm"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/ssm"
 )
 
 func Send(ctx context.Context, log *logrus.Entry, m mailjet.InfoMessagesV31) error {

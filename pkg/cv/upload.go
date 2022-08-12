@@ -11,9 +11,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 	"github.com/dchest/uniuri"
 	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/aws/sns"
-	"github.com/vietnam-immigrations/go-utils/pkg/aws/ssm"
-	"github.com/vietnam-immigrations/go-utils/pkg/mongodb"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/sns"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/ssm"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/mongodb"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

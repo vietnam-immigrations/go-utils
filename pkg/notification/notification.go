@@ -5,7 +5,7 @@ import (
 
 	"github.com/pusher/pusher-http-go/v5"
 	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/mongodb"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/mongodb"
 )
 
 const (

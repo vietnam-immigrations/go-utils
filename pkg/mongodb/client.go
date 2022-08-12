@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/aws/ssm"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/ssm"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )

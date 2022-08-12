@@ -1,4 +1,4 @@
-module github.com/vietnam-immigrations/go-utils
+module github.com/vietnam-immigrations/go-utils/v2
 
 go 1.18
 

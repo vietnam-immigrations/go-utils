@@ -4,7 +4,7 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/mongodb"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/mongodb"
 )
 
 type LogField string
