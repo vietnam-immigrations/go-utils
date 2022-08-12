@@ -1,52 +1,34 @@
 package logger
 
 import (
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/google/uuid"
+	"context"
+	"sync"
+
 	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/v2/pkg/mongodb"
+	vscontext "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
 )
 
 type LogField string
 
-const (
-	LogFieldStage                   LogField = "stage"
-	LogFieldFunction                LogField = "function"
-	LogFieldRequestID               LogField = "request_id"
-	LogFieldRequestPath             LogField = "request_path"
-	LogFieldRequestMethod           LogField = "request_method"
-	LogFieldCorrelationID           LogField = "correlation_id"
-	LogFieldOrderID                 LogField = "order_id"
-	LogFieldOrderWooID              LogField = "order_woo_id"
-	LogFieldOrderNumber             LogField = "order_number"
-	LogFieldApplicantPassportNumber LogField = "applicant_passport_number"
+var (
+	initLogger sync.Once
+	logger     *logrus.Logger
 )
 
-func New() *logrus.Entry {
-	log := logrus.New()
-	log.SetFormatter(&logrus.JSONFormatter{})
-	return log.WithFields(nil)
+func getLogger() *logrus.Logger {
+	initLogger.Do(func() {
+		logger = logrus.New()
+		logger.SetFormatter(&logrus.JSONFormatter{})
+	})
+	return logger
 }
 
-func NewFromRequest(request *events.APIGatewayProxyRequest) *logrus.Entry {
-	log := logrus.New()
-	log.SetFormatter(&logrus.JSONFormatter{})
-
-	stage := request.RequestContext.Stage
-	correlationID, ok := request.Headers["X-Correlation-Id"]
-	if !ok {
-		correlationID = uuid.New().String()
+// FromContext returns logger for this context
+func FromContext(ctx context.Context) *logrus.Entry {
+	fields := make(logrus.Fields, 0)
+	for _, logField := range vscontext.Keys {
+		fields[logField] = ctx.Value(logField)
 	}
-
-	return log.WithField(string(LogFieldStage), stage).
-		WithField(string(LogFieldRequestID), request.RequestContext.RequestID).
-		WithField(string(LogFieldRequestPath), request.Path).
-		WithField(string(LogFieldRequestMethod), request.HTTPMethod).
-		WithField(string(LogFieldCorrelationID), correlationID)
-}
-
-func InstrumentOrderData(log *logrus.Entry, order mongodb.Order) *logrus.Entry {
-	return log.WithField(string(LogFieldOrderID), order.ID).
-		WithField(string(LogFieldOrderWooID), order.OrderID).
-		WithField(string(LogFieldOrderNumber), order.Number)
+	logger := getLogger()
+	return logger.WithFields(fields)
 }

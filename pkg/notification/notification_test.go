@@ -14,7 +14,7 @@ func TestCreate(t *testing.T) {
 	if testing.Short() {
 		t.Skip()
 	}
-	err := notification.Create(context.TODO(), logger.New(), "prod", notification.Notification{
+	err := notification.Create(context.TODO(), logger.FromContext(context.TODO()), "prod", notification.Notification{
 		ID:         uuid.New().String(),
 		CSSClasses: "bg-positive text-white",
 		Message:    "Test message",
