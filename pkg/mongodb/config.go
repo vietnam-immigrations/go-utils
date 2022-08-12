@@ -40,9 +40,7 @@ func GetConfig(ctx context.Context, log *logrus.Entry, stage string) (*Config, e
 	if len(items) == 0 {
 		log.Warnf("missing global configuration, creating a new one")
 		globalConfig := Config{
-			ID:            primitive.NewObjectID(),
-			PusherAppKey:  "",
-			PusherCluster: "",
+			ID: primitive.NewObjectID(),
 		}
 		_, err := colConfig.InsertOne(ctx, globalConfig)
 		if err != nil {
