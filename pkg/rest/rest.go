@@ -6,7 +6,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/google/uuid"
-	context2 "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
+	vscontext "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
 	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 )
 
@@ -82,11 +82,14 @@ func ResponseError(ctx context.Context, status int, request *events.APIGatewayPr
 // AddToContext adds request data to context
 func AddToContext(ctx context.Context, request *events.APIGatewayProxyRequest) context.Context {
 	stage := request.RequestContext.Stage
-	result := context.WithValue(ctx, context2.KeyStage, stage)
+	result := context.WithValue(ctx, vscontext.KeyStage, stage)
 	correlationID, ok := request.Headers["X-Correlation-Id"]
 	if !ok {
 		correlationID = uuid.New().String()
 	}
-	result = context.WithValue(result, context2.KeyCorrelationID, correlationID)
+	result = context.WithValue(result, vscontext.KeyCorrelationID, correlationID)
+	result = context.WithValue(result, vscontext.KeyRequestID, request.RequestContext.RequestID)
+	result = context.WithValue(result, vscontext.KeyRequestPath, request.Path)
+	result = context.WithValue(result, vscontext.KeyRequestMethod, request.HTTPMethod)
 	return result
 }

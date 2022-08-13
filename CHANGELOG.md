@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2022-08-13
+### Fixed
+- Missing fields in request context
+
+## [2.0.0] - 2022-08-13
+### Changed
+- New way to work with context & logger
+
 ## [1.4.0] - 2022-08-12
 ### Added
 - Global config
