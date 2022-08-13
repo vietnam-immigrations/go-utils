@@ -10,6 +10,7 @@ import (
 	awssns "github.com/aws/aws-sdk-go-v2/service/sns"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 	"github.com/dchest/uniuri"
+	"github.com/google/uuid"
 	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/sns"
 	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/ssm"
 	vscontext "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
@@ -79,6 +80,11 @@ func UploadToS3AndSendSNS(ctx context.Context, fileNames []string, fileContents 
 	}
 	log.Infof("messages will be published to [%s]", newResultTopic)
 
+	correlationID, ok := ctx.Value(vscontext.KeyCorrelationID).(string)
+	if !ok || correlationID == "" {
+		correlationID = uuid.New().String()
+	}
+
 	for i, fileName := range fileNames {
 		_, err := snsClient.Publish(ctx, &awssns.PublishInput{
 			Message: aws.String(fmt.Sprintf("New result file [%s]", fileName)),
@@ -90,6 +96,10 @@ func UploadToS3AndSendSNS(ctx context.Context, fileNames []string, fileContents 
 				"resultId": {
 					DataType:    aws.String("String"),
 					StringValue: aws.String(result.ID.Hex()),
+				},
+				vscontext.KeyCorrelationID: {
+					DataType:    aws.String("String"),
+					StringValue: aws.String(correlationID),
 				},
 			},
 			MessageDeduplicationId: aws.String(fmt.Sprintf("%s-%d", result.ID.Hex(), i)),
