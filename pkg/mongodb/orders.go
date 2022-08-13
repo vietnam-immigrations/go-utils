@@ -10,7 +10,7 @@ import (
 )
 
 func CollectionOrders(ctx context.Context, log *logrus.Entry, stage string) (*mongo.Collection, error) {
-	return collection(ctx, log, stage, "orders")
+	return collection(ctx, "orders")
 }
 
 type Billing struct {

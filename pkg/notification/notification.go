@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/pusher/pusher-http-go/v5"
-	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/mongodb"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/mongodb"
 )
 
 const (
@@ -19,9 +19,10 @@ type Notification struct {
 	Message    string `json:"message"`
 }
 
-func Create(ctx context.Context, log *logrus.Entry, stage string, item Notification) error {
+func Create(ctx context.Context, item Notification) error {
+	log := logger.FromContext(ctx)
 	log.Infof("publish message: %+v", item)
-	globalConfig, err := mongodb.GetConfig(ctx, log, stage)
+	globalConfig, err := mongodb.GetConfig(ctx)
 	if err != nil {
 		log.Errorf("failed to load global config: %s", err)
 		return err

@@ -6,7 +6,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/sirupsen/logrus"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 )
 
 var (
@@ -19,11 +19,15 @@ var (
 	preSignClient     *s3.PresignClient
 )
 
-func NewClient(ctx context.Context, log *logrus.Entry) (*s3.Client, error) {
+func NewClient(ctx context.Context) (*s3.Client, error) {
+	log := logger.FromContext(ctx)
+
 	var err error
 	initClient.Do(func() {
+		log.Infof("init s3 client")
 		cfg, e := config.LoadDefaultConfig(ctx)
 		if e != nil {
+			log.Errorf("failed to load config: %s", e)
 			err = e
 			return
 		}
@@ -37,10 +41,13 @@ func NewClient(ctx context.Context, log *logrus.Entry) (*s3.Client, error) {
 	return client, nil
 }
 
-func NewPreSignClient(ctx context.Context, log *logrus.Entry) (*s3.PresignClient, error) {
+func NewPreSignClient(ctx context.Context) (*s3.PresignClient, error) {
+	log := logger.FromContext(ctx)
+
 	var err error
 	initPreSignClient.Do(func() {
-		_, e := NewClient(ctx, log)
+		log.Infof("init s3 presign client")
+		_, e := NewClient(ctx)
 		if e != nil {
 			err = e
 			return

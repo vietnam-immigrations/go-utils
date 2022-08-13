@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/aws/ssm"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/ssm"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -17,22 +17,25 @@ var (
 	db         string
 )
 
-func newClient(ctx context.Context, log *logrus.Entry, stage string) (*mongo.Client, error) {
+// newClient returns mongo client. Stage must be in context.
+func newClient(ctx context.Context) (*mongo.Client, error) {
+	log := logger.FromContext(ctx)
+
 	initClient.Do(func() {
 		log.Infof("init mongodb client")
-		mongoHost, err := ssm.GetParameter(ctx, log, "vs2", "all", "/mongo/host", false)
+		mongoHost, err := ssm.GetCommonParameter(ctx, "vs2", "/mongo/host", false)
 		if err != nil {
 			return
 		}
-		mongoUsername, err := ssm.GetParameter(ctx, log, "vs2", stage, "/mongo/username", false)
+		mongoUsername, err := ssm.GetStageParameter(ctx, "vs2", "/mongo/username", false)
 		if err != nil {
 			return
 		}
-		mongoPassword, err := ssm.GetParameter(ctx, log, "vs2", stage, "/mongo/password", true)
+		mongoPassword, err := ssm.GetStageParameter(ctx, "vs2", "/mongo/password", true)
 		if err != nil {
 			return
 		}
-		mongoDatabase, err := ssm.GetParameter(ctx, log, "vs2", stage, "/mongo/db", false)
+		mongoDatabase, err := ssm.GetStageParameter(ctx, "vs2", "/mongo/db", false)
 		if err != nil {
 			return
 		}
@@ -65,7 +68,9 @@ func newClient(ctx context.Context, log *logrus.Entry, stage string) (*mongo.Cli
 	return client, nil
 }
 
-func Disconnect(ctx context.Context, log *logrus.Entry) {
+// Disconnect disconnects from db
+func Disconnect(ctx context.Context) {
+	log := logger.FromContext(ctx)
 	if client != nil {
 		err := client.Disconnect(ctx)
 		if err != nil {

@@ -1,6 +1,7 @@
 package network
 
 import (
+	"context"
 	"testing"
 
 	"github.com/sirupsen/logrus"
@@ -9,7 +10,7 @@ import (
 
 func TestDownloadFile(t *testing.T) {
 	log := logrus.WithFields(nil)
-	res, err := DownloadFile(log, "https://google.com")
+	res, err := DownloadFile(context.TODO(), "https://google.com")
 	assert.NoError(t, err)
 	log.Infof(string(res))
 }

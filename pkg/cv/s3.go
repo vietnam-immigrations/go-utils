@@ -9,12 +9,13 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awss3 "github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/aws/s3"
-	"github.com/vietnam-immigrations/go-utils/pkg/mongodb"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/s3"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/mongodb"
 )
 
-func putToS3Bucket(ctx context.Context, log *logrus.Entry, result *mongodb.Result, bucket string, fileName string, fileContent io.ReadCloser) (string, error) {
+func putToS3Bucket(ctx context.Context, result *mongodb.Result, bucket string, fileName string, fileContent io.ReadCloser) (string, error) {
+	log := logger.FromContext(ctx)
 	log.Infof("upload file [%s] to [%s]", fileName, bucket)
 
 	checkContent, err := ioutil.ReadAll(fileContent)
@@ -30,7 +31,7 @@ func putToS3Bucket(ctx context.Context, log *logrus.Entry, result *mongodb.Resul
 	}(fileContent)
 	newContent := bytes.NewReader(checkContent)
 
-	s3Client, err := s3.NewClient(ctx, log)
+	s3Client, err := s3.NewClient(ctx)
 	if err != nil {
 		log.Errorf("failed to initiate s3 client: %s", err)
 		return "", err

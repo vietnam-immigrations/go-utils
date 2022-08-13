@@ -8,26 +8,27 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/sirupsen/logrus"
-	"github.com/vietnam-immigrations/go-utils/pkg/aws/ssm"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/ssm"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 )
 
-func GetOrder(ctx context.Context, log *logrus.Entry, stage string, orderID string) (*Order, error) {
+func GetOrder(ctx context.Context, orderID string) (*Order, error) {
+	log := logger.FromContext(ctx)
 	log.Infof("get order [%s]", orderID)
 
-	host, err := ssm.GetParameter(ctx, log, "vs2", stage, "/woo/host", false)
+	host, err := ssm.GetStageParameter(ctx, "vs2", "/woo/host", false)
 	if err != nil {
 		log.Errorf("failed to read woo host: %s", err)
 		return nil, err
 	}
 
-	username, err := ssm.GetParameter(ctx, log, "vs2", stage, "/woo/username", false)
+	username, err := ssm.GetStageParameter(ctx, "vs2", "/woo/username", false)
 	if err != nil {
 		log.Errorf("failed to read woo username: %s", err)
 		return nil, err
 	}
 
-	password, err := ssm.GetParameter(ctx, log, "vs2", stage, "/woo/password", true)
+	password, err := ssm.GetStageParameter(ctx, "vs2", "/woo/password", true)
 	if err != nil {
 		log.Errorf("failed to read woo password: %s", err)
 		return nil, err
@@ -64,6 +65,6 @@ func GetOrder(ctx context.Context, log *logrus.Entry, stage string, orderID stri
 		log.Errorf("%s", string(bodyText))
 		return nil, err
 	}
-	log.Infof("order: %v", *order)
+	log.Infof("order: %+v", *order)
 	return order, nil
 }

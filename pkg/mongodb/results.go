@@ -4,13 +4,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func CollectionResult(ctx context.Context, log *logrus.Entry, stage string) (*mongo.Collection, error) {
-	return collection(ctx, log, stage, "results")
+func CollectionResult(ctx context.Context) (*mongo.Collection, error) {
+	return collection(ctx, "results")
 }
 
 type ResultFile struct {

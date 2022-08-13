@@ -4,14 +4,14 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/sirupsen/logrus"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func CollectionConfig(ctx context.Context, log *logrus.Entry, stage string) (*mongo.Collection, error) {
-	return collection(ctx, log, stage, "config")
+func CollectionConfig(ctx context.Context) (*mongo.Collection, error) {
+	return collection(ctx, "config")
 }
 
 type Config struct {
@@ -22,9 +22,10 @@ type Config struct {
 	PusherCluster   string             `bson:"pusherCluster" json:"pusherCluster"`
 }
 
-func GetConfig(ctx context.Context, log *logrus.Entry, stage string) (*Config, error) {
+func GetConfig(ctx context.Context) (*Config, error) {
+	log := logger.FromContext(ctx)
 	log.Infof("getting global configuration")
-	colConfig, err := CollectionConfig(ctx, log, stage)
+	colConfig, err := CollectionConfig(ctx)
 	if err != nil {
 		return nil, err
 	}

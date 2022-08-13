@@ -6,15 +6,16 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
-	"github.com/vietnam-immigrations/go-utils/pkg/logger"
-	"github.com/vietnam-immigrations/go-utils/pkg/notification"
+	vscontext "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/notification"
 )
 
 func TestCreate(t *testing.T) {
 	if testing.Short() {
 		t.Skip()
 	}
-	err := notification.Create(context.TODO(), logger.New(), "prod", notification.Notification{
+	ctx := context.WithValue(context.Background(), vscontext.KeyStage, "prod")
+	err := notification.Create(ctx, notification.Notification{
 		ID:         uuid.New().String(),
 		CSSClasses: "bg-positive text-white",
 		Message:    "Test message",
