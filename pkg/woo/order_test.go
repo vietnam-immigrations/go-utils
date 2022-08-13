@@ -4,14 +4,15 @@ import (
 	"context"
 	"testing"
 
-	"github.com/sirupsen/logrus"
+	vscontext "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
 )
 
 func TestGetOrder(t *testing.T) {
 	if testing.Short() {
 		t.Skip()
 	}
-	_, err := GetOrder(context.TODO(), logrus.WithFields(nil), "dev", "110")
+	ctx := context.WithValue(context.Background(), vscontext.KeyStage, "dev")
+	_, err := GetOrder(ctx, "110")
 	if err != nil {
 		t.Fail()
 	}

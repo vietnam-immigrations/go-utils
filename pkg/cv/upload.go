@@ -10,15 +10,23 @@ import (
 	awssns "github.com/aws/aws-sdk-go-v2/service/sns"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 	"github.com/dchest/uniuri"
-	"github.com/sirupsen/logrus"
 	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/sns"
 	"github.com/vietnam-immigrations/go-utils/v2/pkg/aws/ssm"
+	vscontext "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 	"github.com/vietnam-immigrations/go-utils/v2/pkg/mongodb"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func UploadToS3AndSendSNS(ctx context.Context, log *logrus.Entry, stage string, fileNames []string, fileContents []io.ReadCloser) error {
-	s3Bucket, err := ssm.GetParameter(ctx, log, "vs2", stage, "/result/s3BucketName", false)
+// UploadToS3AndSendSNS uploads PDF to S3 and send SNS. Stage must be in context
+func UploadToS3AndSendSNS(ctx context.Context, fileNames []string, fileContents []io.ReadCloser) error {
+	log := logger.FromContext(ctx)
+	stage, ok := ctx.Value(vscontext.KeyStage).(string)
+	if !ok {
+		return fmt.Errorf("missing stage in context")
+	}
+
+	s3Bucket, err := ssm.GetStageParameter(ctx, "vs2", "/result/s3BucketName", false)
 	if err != nil {
 		log.Errorf("failed to get s3 location: %s", err)
 		return err
@@ -34,7 +42,7 @@ func UploadToS3AndSendSNS(ctx context.Context, log *logrus.Entry, stage string, 
 
 	// copy files to S3
 	for i, fileName := range fileNames {
-		_, err := putToS3Bucket(ctx, log, result, s3Bucket, fileName, fileContents[i])
+		_, err := putToS3Bucket(ctx, result, s3Bucket, fileName, fileContents[i])
 		if err != nil {
 			log.Errorf("failed to put to S3: %s", err)
 			return err
@@ -48,7 +56,7 @@ func UploadToS3AndSendSNS(ctx context.Context, log *logrus.Entry, stage string, 
 	}
 
 	// save result to mongo
-	colResult, err := mongodb.CollectionResult(ctx, log, stage)
+	colResult, err := mongodb.CollectionResult(ctx)
 	if err != nil {
 		log.Errorf("failed to get mongodb collection: %s", err)
 		return err
@@ -60,12 +68,12 @@ func UploadToS3AndSendSNS(ctx context.Context, log *logrus.Entry, stage string, 
 	}
 
 	// publish SNS
-	snsClient, err := sns.NewClient(ctx, log)
+	snsClient, err := sns.NewClient(ctx)
 	if err != nil {
 		log.Errorf("failed to create SNS client: %s", err)
 		return err
 	}
-	newResultTopic, err := ssm.GetParameter(ctx, log, "vs2", stage, "/sns/newResult/arn", false)
+	newResultTopic, err := ssm.GetStageParameter(ctx, "vs2", "/sns/newResult/arn", false)
 	if err != nil {
 		log.Errorf("failed to get SNS topic arn: %s", err)
 	}

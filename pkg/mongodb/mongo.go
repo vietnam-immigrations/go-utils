@@ -3,14 +3,26 @@ package mongodb
 import (
 	"context"
 
-	"github.com/sirupsen/logrus"
+	context2 "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func collection(ctx context.Context, log *logrus.Entry, stage string, name string) (*mongo.Collection, error) {
-	client, err := newClient(ctx, log, stage)
+// collection returns collection. Stage must be in context.
+func collection(ctx context.Context, name string) (*mongo.Collection, error) {
+	log := logger.FromContext(ctx)
+	log.Infof("get collection [%s]", name)
+	client, err := newClient(ctx)
 	if err != nil {
 		return nil, err
 	}
 	return client.Database(db).Collection(name), nil
+}
+
+// AddOrderToContext adds order data to context
+func AddOrderToContext(ctx context.Context, order Order) context.Context {
+	result := context.WithValue(ctx, context2.KeyOrderID, order.ID)
+	result = context.WithValue(result, context2.KeyOrderWooID, order.OrderID)
+	result = context.WithValue(result, context2.KeyOrderNumber, order.Number)
+	return result
 }

@@ -1,17 +1,19 @@
 package network
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"time"
 
-	"github.com/sirupsen/logrus"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 )
 
 // DownloadFileWithTimeout download file with a specific timeout
-func DownloadFileWithTimeout(log *logrus.Entry, url string, timeout time.Duration) ([]byte, error) {
+func DownloadFileWithTimeout(ctx context.Context, url string, timeout time.Duration) ([]byte, error) {
+	log := logger.FromContext(ctx)
 	log.Infof("download file [%s]", url)
 	client := http.Client{Timeout: timeout}
 	res, err := client.Get(url)
@@ -38,6 +40,6 @@ func DownloadFileWithTimeout(log *logrus.Entry, url string, timeout time.Duratio
 }
 
 // DownloadFile download file, default timeout = 30 seconds
-func DownloadFile(log *logrus.Entry, url string) ([]byte, error) {
-	return DownloadFileWithTimeout(log, url, 30*time.Second)
+func DownloadFile(ctx context.Context, url string) ([]byte, error) {
+	return DownloadFileWithTimeout(ctx, url, 30*time.Second)
 }

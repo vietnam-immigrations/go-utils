@@ -1,17 +1,21 @@
 package rest
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/sirupsen/logrus"
+	"github.com/google/uuid"
+	context2 "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 )
 
-func Response(log *logrus.Entry, status int, request *events.APIGatewayProxyRequest, body interface{}) *events.APIGatewayProxyResponse {
-	log.Infof("http response: [%d] %v", status, body)
+func Response(ctx context.Context, status int, request *events.APIGatewayProxyRequest, body interface{}) *events.APIGatewayProxyResponse {
+	log := logger.FromContext(ctx)
+	log.Infof("http response: [%d] %+v", status, body)
 	bodyString, err := json.Marshal(body)
 	if err != nil {
-		return ResponseError(log, 500, request, err)
+		return ResponseError(ctx, 500, request, err)
 	}
 	return &events.APIGatewayProxyResponse{
 		StatusCode: status,
@@ -23,8 +27,9 @@ func Response(log *logrus.Entry, status int, request *events.APIGatewayProxyRequ
 	}
 }
 
-func ResponseRaw(log *logrus.Entry, status int, body string) *events.APIGatewayProxyResponse {
-	log.Infof("http response: [%d] %v", status, body)
+func ResponseRaw(ctx context.Context, status int, body string) *events.APIGatewayProxyResponse {
+	log := logger.FromContext(ctx)
+	log.Infof("http response: [%d] %+v", status, body)
 	return &events.APIGatewayProxyResponse{
 		StatusCode: status,
 		Body:       body,
@@ -43,8 +48,9 @@ type ErrorBody struct {
 	RequestTime string `json:"requestTime"`
 }
 
-func ResponseError(log *logrus.Entry, status int, request *events.APIGatewayProxyRequest, err error) *events.APIGatewayProxyResponse {
-	log.Infof("http error response: [%d] %v", status, err)
+func ResponseError(ctx context.Context, status int, request *events.APIGatewayProxyRequest, err error) *events.APIGatewayProxyResponse {
+	log := logger.FromContext(ctx)
+	log.Infof("http error response: [%d] %+v", status, err)
 	body := ErrorBody{
 		Message:     err.Error(),
 		Method:      request.HTTPMethod,
@@ -71,4 +77,16 @@ func ResponseError(log *logrus.Entry, status int, request *events.APIGatewayProx
 			"Access-Control-Allow-Headers": "*",
 		},
 	}
+}
+
+// AddToContext adds request data to context
+func AddToContext(ctx context.Context, request *events.APIGatewayProxyRequest) context.Context {
+	stage := request.RequestContext.Stage
+	result := context.WithValue(ctx, context2.KeyStage, stage)
+	correlationID, ok := request.Headers["X-Correlation-Id"]
+	if !ok {
+		correlationID = uuid.New().String()
+	}
+	result = context.WithValue(result, context2.KeyCorrelationID, correlationID)
+	return result
 }

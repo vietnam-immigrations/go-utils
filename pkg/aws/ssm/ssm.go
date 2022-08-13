@@ -7,19 +7,41 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
+	vscontext "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 )
 
-func GetParameter(ctx context.Context, log *logrus.Entry, namespace, stage, name string, decryption bool) (string, error) {
+const (
+	stageAll = "all"
+)
+
+// GetCommonParameter returns common parameter (stage = "all")
+func GetCommonParameter(ctx context.Context, namespace, name string, decryption bool) (string, error) {
+	return getParameter(ctx, stageAll, namespace, name, decryption)
+}
+
+// GetStageParameter returns ssm parameter. Stage must be in context.
+func GetStageParameter(ctx context.Context, namespace, name string, decryption bool) (string, error) {
+	stage, ok := ctx.Value(vscontext.KeyStage).(string)
+	if !ok {
+		return "", fmt.Errorf("missing stage in context")
+	}
+
+	return getParameter(ctx, stage, namespace, name, decryption)
+}
+
+func getParameter(ctx context.Context, stage, namespace, name string, decryption bool) (string, error) {
+	log := logger.FromContext(ctx)
+
 	ssmKey := fmt.Sprintf("/%s/%s%s", namespace, stage, name)
 	log.Infof("get [%s] variable", ssmKey)
-	client, err := newClient(ctx, log)
+	ssmClient, err := newClient(ctx)
 	if err != nil {
 		log.Errorf("failed to create SSM client: %s", err)
 		return "", err
 	}
 
-	getParameter, err := client.GetParameter(ctx, &ssm.GetParameterInput{
+	getParameter, err := ssmClient.GetParameter(ctx, &ssm.GetParameterInput{
 		Name:           aws.String(ssmKey),
 		WithDecryption: decryption,
 	})

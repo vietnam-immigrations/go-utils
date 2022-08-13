@@ -5,10 +5,12 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/sirupsen/logrus"
+	"github.com/vietnam-immigrations/go-utils/v2/pkg/logger"
 )
 
-func NewClientForRegion(ctx context.Context, log *logrus.Entry, region string) (*s3.Client, error) {
+func NewClientForRegion(ctx context.Context, region string) (*s3.Client, error) {
+	log := logger.FromContext(ctx)
+
 	log.Infof("create s3 client for region [%s]", region)
 	cfg, err := config.LoadDefaultConfig(ctx)
 	if err != nil {
