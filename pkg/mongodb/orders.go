@@ -4,13 +4,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/sirupsen/logrus"
 	vscontext "github.com/vietnam-immigrations/go-utils/v2/pkg/context"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func CollectionOrders(ctx context.Context, log *logrus.Entry, stage string) (*mongo.Collection, error) {
+func CollectionOrders(ctx context.Context) (*mongo.Collection, error) {
 	return collection(ctx, "orders")
 }
 
