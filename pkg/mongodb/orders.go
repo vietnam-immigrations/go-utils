@@ -48,8 +48,9 @@ type Applicant struct {
 	PassportNumber string `bson:"passportNumber" json:"passportNumber"`
 	PassportExpiry string `bson:"passportExpiry" json:"passportExpiry"`
 
-	VisaS3Key string `bson:"visaS3Key" json:"visaS3Key"`
-	VisaSent  bool   `bson:"visaSent" json:"visaSent"`
+	VisaS3Key    string `bson:"visaS3Key" json:"visaS3Key"`
+	VisaSent     bool   `bson:"visaSent" json:"visaSent"`
+	CancelReason string `bson:"cancelReason" json:"cancelReason"`
 }
 
 type Order struct {
