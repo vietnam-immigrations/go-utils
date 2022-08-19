@@ -65,7 +65,7 @@ type Order struct {
 	Applicants         []Applicant        `bson:"applicants" json:"applicants"`
 
 	AllVisaSent  bool      `bson:"allVisaSent" json:"allVisaSent"`
-	InvoiceDocID string    `bson:"InvoiceDocId" json:"invoiceDocId"`
+	InvoiceDocID string    `bson:"invoiceDocId" json:"invoiceDocId"`
 	CreatedAt    time.Time `bson:"createdAt" json:"createdAt"`
 	UpdatedAt    time.Time `bson:"updatedAt" json:"updatedAt"`
 }
