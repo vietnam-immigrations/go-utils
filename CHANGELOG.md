@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.6] - 2022-08-19
+### Changed
+- Mailjet timeout to 300 seconds
+
 ## [2.0.5] - 2022-08-18
 ### Added
 - Applicant "CancelReason"
