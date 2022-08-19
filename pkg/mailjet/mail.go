@@ -28,7 +28,7 @@ func Send(ctx context.Context, m mailjet.InfoMessagesV31) error {
 
 	// TODO: mailjet should provide a way to use custom http.Client
 	// see https://github.com/mailjet/mailjet-apiv3-go/issues/95
-	http.DefaultClient.Timeout = 60 * time.Second
+	http.DefaultClient.Timeout = 300 * time.Second
 	client := mailjet.NewMailjetClient(username, password)
 	messages := mailjet.MessagesV31{
 		Info: []mailjet.InfoMessagesV31{m},
