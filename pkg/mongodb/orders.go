@@ -64,7 +64,8 @@ type Order struct {
 	Trip               Trip               `bson:"trip" json:"trip"`
 	Applicants         []Applicant        `bson:"applicants" json:"applicants"`
 
-	AllVisaSent bool      `bson:"allVisaSent" json:"allVisaSent"`
-	CreatedAt   time.Time `bson:"createdAt" json:"createdAt"`
-	UpdatedAt   time.Time `bson:"updatedAt" json:"updatedAt"`
+	AllVisaSent  bool      `bson:"allVisaSent" json:"allVisaSent"`
+	InvoiceDocID string    `bson:"InvoiceDocId" json:"invoiceDocId"`
+	CreatedAt    time.Time `bson:"createdAt" json:"createdAt"`
+	UpdatedAt    time.Time `bson:"updatedAt" json:"updatedAt"`
 }
