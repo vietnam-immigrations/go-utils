@@ -20,6 +20,8 @@ type Config struct {
 	PusherAppKey    string             `bson:"pusherAppKey" json:"pusherAppKey"`
 	PusherAppSecret string             `bson:"pusherAppSecret" json:"pusherAppSecret"`
 	PusherCluster   string             `bson:"pusherCluster" json:"pusherCluster"`
+	AdminDomain     string             `bson:"adminDomain" json:"adminDomain"`
+	CustomerDomain  string             `bson:"customerDomain" json:"customerDomain"`
 }
 
 func GetConfig(ctx context.Context) (*Config, error) {
