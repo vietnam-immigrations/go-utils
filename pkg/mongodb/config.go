@@ -23,10 +23,10 @@ type Config struct {
 	AdminDomain             string             `bson:"adminDomain" json:"adminDomain"`
 	CustomerDomain          string             `bson:"customerDomain" json:"customerDomain"`
 	EmailCustomerCC         string             `bson:"emailCustomerCc" json:"emailCustomerCc"`
-	EmailCustomerTemplateID string             `bson:"emailCustomerTemplateId" json:"emailCustomerTemplateId"`
+	EmailCustomerTemplateID int                `bson:"emailCustomerTemplateId" json:"emailCustomerTemplateId"`
 	EmailPartner            string             `bson:"emailPartner" json:"emailPartner"`
 	EmailPartnerCC          string             `bson:"emailPartnerCc" json:"emailPartnerCc"`
-	EmailPartnerTemplateID  string             `bson:"emailPartnerTemplateId" json:"emailPartnerTemplateId"`
+	EmailPartnerTemplateID  int                `bson:"emailPartnerTemplateId" json:"emailPartnerTemplateId"`
 	APIRoot                 string             `bson:"ApiRoot" json:"ApiRoot"`
 	APIKey                  string             `bson:"ApiKey" json:"ApiKey"`
 }
