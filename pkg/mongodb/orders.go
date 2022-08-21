@@ -30,6 +30,7 @@ type Billing struct {
 }
 
 type Trip struct {
+	// ArrivalDate is the raw value from woocommerce order
 	ArrivalDate      string `bson:"arrivalDate" json:"arrivalDate"`
 	Checkpoint       string `bson:"checkpoint" json:"checkpoint"`
 	ProcessingTime   string `bson:"processingTime" json:"processingTime"`
@@ -37,6 +38,9 @@ type Trip struct {
 	CarPickup        bool   `bson:"carPickup" json:"carPickup"`
 	Flight           string `bson:"flight" json:"flight"`
 	CarPickupAddress string `bson:"carPickupAddress" json:"carPickupAddress"`
+
+	// Arrival is the parsed value from ArrivalDate
+	Arrival time.Time `bson:"arrival" json:"arrival"`
 }
 
 type Applicant struct {

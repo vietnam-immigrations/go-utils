@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2022-08-21
+### Added
+- Parsed arrival date
+
 ## [2.0.12] - 2022-08-21
 ### Added
 - Parse woo date string
