@@ -27,8 +27,8 @@ type Config struct {
 	EmailPartner            string             `bson:"emailPartner" json:"emailPartner"`
 	EmailPartnerCC          string             `bson:"emailPartnerCc" json:"emailPartnerCc"`
 	EmailPartnerTemplateID  int                `bson:"emailPartnerTemplateId" json:"emailPartnerTemplateId"`
-	APIRoot                 string             `bson:"ApiRoot" json:"ApiRoot"`
-	APIKey                  string             `bson:"ApiKey" json:"ApiKey"`
+	APIRoot                 string             `bson:"apiRoot" json:"apiRoot"`
+	APIKey                  string             `bson:"apiKey" json:"apiKey"`
 }
 
 func GetConfig(ctx context.Context) (*Config, error) {
