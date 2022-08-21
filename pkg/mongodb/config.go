@@ -15,13 +15,20 @@ func CollectionConfig(ctx context.Context) (*mongo.Collection, error) {
 }
 
 type Config struct {
-	ID              primitive.ObjectID `bson:"_id" json:"id"`
-	PusherAppID     string             `bson:"pusherAppId" json:"pusherAppId"`
-	PusherAppKey    string             `bson:"pusherAppKey" json:"pusherAppKey"`
-	PusherAppSecret string             `bson:"pusherAppSecret" json:"pusherAppSecret"`
-	PusherCluster   string             `bson:"pusherCluster" json:"pusherCluster"`
-	AdminDomain     string             `bson:"adminDomain" json:"adminDomain"`
-	CustomerDomain  string             `bson:"customerDomain" json:"customerDomain"`
+	ID                      primitive.ObjectID `bson:"_id" json:"id"`
+	PusherAppID             string             `bson:"pusherAppId" json:"pusherAppId"`
+	PusherAppKey            string             `bson:"pusherAppKey" json:"pusherAppKey"`
+	PusherAppSecret         string             `bson:"pusherAppSecret" json:"pusherAppSecret"`
+	PusherCluster           string             `bson:"pusherCluster" json:"pusherCluster"`
+	AdminDomain             string             `bson:"adminDomain" json:"adminDomain"`
+	CustomerDomain          string             `bson:"customerDomain" json:"customerDomain"`
+	EmailCustomerCC         string             `bson:"emailCustomerCc" json:"emailCustomerCc"`
+	EmailCustomerTemplateID int                `bson:"emailCustomerTemplateId" json:"emailCustomerTemplateId"`
+	EmailPartner            string             `bson:"emailPartner" json:"emailPartner"`
+	EmailPartnerCC          string             `bson:"emailPartnerCc" json:"emailPartnerCc"`
+	EmailPartnerTemplateID  int                `bson:"emailPartnerTemplateId" json:"emailPartnerTemplateId"`
+	APIRoot                 string             `bson:"ApiRoot" json:"ApiRoot"`
+	APIKey                  string             `bson:"ApiKey" json:"ApiKey"`
 }
 
 func GetConfig(ctx context.Context) (*Config, error) {
