@@ -26,10 +26,9 @@ func Send(ctx context.Context, m mailjet.InfoMessagesV31) error {
 		return errors.Wrap(err, "failed to get mailjet password")
 	}
 
-	// TODO: mailjet should provide a way to use custom http.Client
-	// see https://github.com/mailjet/mailjet-apiv3-go/issues/95
-	http.DefaultClient.Timeout = 300 * time.Second
+	httpClient := &http.Client{Timeout: 300 * time.Second}
 	client := mailjet.NewMailjetClient(username, password)
+	client.SetClient(httpClient)
 	messages := mailjet.MessagesV31{
 		Info: []mailjet.InfoMessagesV31{m},
 	}
