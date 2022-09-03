@@ -6,9 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.1.1] - 2022-08-21
-## Changed
-### Avoid using default http client
+## [2.1.2] - 2022-09-03
+### Added
+- Mailjet template ids for priority mail
+
+## [2.1.1] - 2022-09-03
+### Changed
+- Avoid using default http client
 
 ## [2.1.0] - 2022-08-21
 ### Added
