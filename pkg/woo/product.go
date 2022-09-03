@@ -11,6 +11,7 @@ const (
 	ProductAttributePassportNumber   = "vs2_passport_number"
 	ProductAttributePassportExpiry   = "vs2_passport_expiry"
 	ProductAttributeRegistrationCode = "vs2_registration_code"
+	ProductAttributeEmail            = "vs2_email"
 
 	ProductSKUPriorityHandling = "V2"
 )
