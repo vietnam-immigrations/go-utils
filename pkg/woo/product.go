@@ -12,6 +12,11 @@ const (
 	ProductAttributePassportExpiry   = "vs2_passport_expiry"
 	ProductAttributeRegistrationCode = "vs2_registration_code"
 	ProductAttributeEmail            = "vs2_email"
+	ProductAttributeArrivalDate      = "vs2_arrival_date"
+	ProductAttributeCheckpoint       = "vs2_checkpoint"
+	ProductAttributeProcessingTime   = "vs2_processing_time"
+	ProductAttributeFastTrack        = "vs2_fast_track"
+	ProductAttributeCarPickup        = "vs2_car_pickup"
 
 	ProductSKUPriorityHandling = "V2"
 )
