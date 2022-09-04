@@ -17,6 +17,7 @@ const (
 	ProductAttributeProcessingTime   = "vs2_processing_time"
 	ProductAttributeFastTrack        = "vs2_fast_track"
 	ProductAttributeCarPickup        = "vs2_car_pickup"
+	ProductAttributeCarPickupAddress = "vs2_car_pickup_address"
 
 	ProductSKUPriorityHandling = "V2"
 )
