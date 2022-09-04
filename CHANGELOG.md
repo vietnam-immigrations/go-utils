@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.7] - 2022-09-04
+### Added
+- Product attribute vs2_flight
+
 ## [2.1.6] - 2022-09-04
 ### Added
 - Added product attribute vs2_car_pickup_address

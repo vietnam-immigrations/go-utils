@@ -16,6 +16,7 @@ const (
 	ProductAttributeCheckpoint       = "vs2_checkpoint"
 	ProductAttributeProcessingTime   = "vs2_processing_time"
 	ProductAttributeFastTrack        = "vs2_fast_track"
+	ProductAttributeFlight           = "vs2_flight"
 	ProductAttributeCarPickup        = "vs2_car_pickup"
 	ProductAttributeCarPickupAddress = "vs2_car_pickup_address"
 
