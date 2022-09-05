@@ -44,18 +44,27 @@ type Trip struct {
 }
 
 type Applicant struct {
-	FirstName      string `bson:"firstName" json:"firstName"`
-	LastName       string `bson:"lastName" json:"lastName"`
-	DateOfBirth    string `bson:"dateOfBirth" json:"dateOfBirth"`
-	Sex            string `bson:"sex" json:"sex"`
-	Nationality    string `bson:"nationality" json:"nationality"`
-	PassportNumber string `bson:"passportNumber" json:"passportNumber"`
-	PassportExpiry string `bson:"passportExpiry" json:"passportExpiry"`
+	FirstName        string `bson:"firstName" json:"firstName"`
+	LastName         string `bson:"lastName" json:"lastName"`
+	DateOfBirth      string `bson:"dateOfBirth" json:"dateOfBirth"`
+	Sex              string `bson:"sex" json:"sex"`
+	Nationality      string `bson:"nationality" json:"nationality"`
+	PassportNumber   string `bson:"passportNumber" json:"passportNumber"`
+	PassportExpiry   string `bson:"passportExpiry" json:"passportExpiry"`
+	RegistrationCode string `bson:"registrationCode" json:"registrationCode"`
+	Email            string `bson:"email" json:"email"`
 
 	VisaS3Key    string `bson:"visaS3Key" json:"visaS3Key"`
 	VisaSent     bool   `bson:"visaSent" json:"visaSent"`
 	CancelReason string `bson:"cancelReason" json:"cancelReason"`
 }
+
+type OrderType string
+
+const (
+	OrderTypeVisa     OrderType = ""
+	OrderTypePriority OrderType = "Priority"
+)
 
 type Order struct {
 	ID                 primitive.ObjectID `bson:"_id" json:"id"`
@@ -67,6 +76,7 @@ type Order struct {
 	Number             string             `bson:"number" json:"number"`
 	Trip               Trip               `bson:"trip" json:"trip"`
 	Applicants         []Applicant        `bson:"applicants" json:"applicants"`
+	Type               OrderType          `bson:"type" json:"type"`
 
 	AllVisaSent  bool      `bson:"allVisaSent" json:"allVisaSent"`
 	InvoiceDocID string    `bson:"invoiceDocId" json:"invoiceDocId"`
