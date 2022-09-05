@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.8] - 2022-09-05
+### Added
+- Priority attribute to order
+
 ## [2.1.7] - 2022-09-04
 ### Added
 - Product attribute vs2_flight
