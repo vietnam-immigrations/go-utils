@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] - 2022-09-09
+### Changed
+- Store mongodb host in stage variable
+
 ## [2.1.8] - 2022-09-05
 ### Added
 - Priority attribute to order

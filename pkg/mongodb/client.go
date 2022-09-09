@@ -23,7 +23,7 @@ func newClient(ctx context.Context) (*mongo.Client, error) {
 
 	initClient.Do(func() {
 		log.Infof("init mongodb client")
-		mongoHost, err := ssm.GetCommonParameter(ctx, "vs2", "/mongo/host", false)
+		mongoHost, err := ssm.GetStageParameter(ctx, "vs2", "/mongo/host", false)
 		if err != nil {
 			return
 		}
