@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.1] - 2022-09-16
+### Added
+- AWS textract
+- Convert unicode text to ASCII
+
 ## [2.2.0] - 2022-09-09
 ### Changed
 - Store mongodb host in stage variable
