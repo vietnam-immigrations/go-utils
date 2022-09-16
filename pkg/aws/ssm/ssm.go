@@ -43,7 +43,7 @@ func getParameter(ctx context.Context, stage, namespace, name string, decryption
 
 	getParameter, err := ssmClient.GetParameter(ctx, &ssm.GetParameterInput{
 		Name:           aws.String(ssmKey),
-		WithDecryption: decryption,
+		WithDecryption: aws.Bool(decryption),
 	})
 	if err != nil {
 		log.Errorf("failed to read SSM: %s", err)
