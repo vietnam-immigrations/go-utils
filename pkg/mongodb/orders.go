@@ -78,6 +78,7 @@ type Order struct {
 	Applicants         []Applicant        `bson:"applicants" json:"applicants"`
 	Type               OrderType          `bson:"type" json:"type"`
 
+	Rejected     bool      `bson:"rejected" json:"rejected"`
 	AllVisaSent  bool      `bson:"allVisaSent" json:"allVisaSent"`
 	InvoiceDocID string    `bson:"invoiceDocId" json:"invoiceDocId"`
 	CreatedAt    time.Time `bson:"createdAt" json:"createdAt"`
