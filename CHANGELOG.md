@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2022-11-04
+### Added
+- Order field "Rejected"
+### Removed
+- Newrelic
+
 ## [2.3.0] - 2022-10-19
 ### Added
 - Newrelic
