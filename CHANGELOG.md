@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.0] - 2022-11-06
+### Removed
+- Order field "Rejected"
+
 ## [2.4.0] - 2022-11-04
 ### Added
 - Order field "Rejected"
